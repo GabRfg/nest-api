@@ -11,8 +11,8 @@ export const dataSourceOptions: DataSourceOptions = {
   username: 'postgres',
   password: 'docker',
   database: 'devtraining',
-  entities: [Course, Tag], //Define as entidades que o TypeOrm deve gerenciar
-  synchronize: true,
+  entities: [Course, Tag],  //Define as entidades que o TypeOrm deve gerenciar
+  synchronize: false,        //prod não se usa, apenas em dev para criar as tabelas automaticamente
 };
 
 //Pega tudo que foi definido acima, e passa para o modulo do TypeOrm 
