@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { Course } from 'src/courses/entities/courses.entity';
-//import { Type } from 'class-transformer';
-//import { data } from 'framer-motion/client';
 import { DataSourceOptions } from 'typeorm';
 
 export const dataSourceOptions: DataSourceOptions = {

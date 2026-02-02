@@ -4,6 +4,7 @@ import { CoursesService } from './courses.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './entities/courses.entity';
 
+//Possível criar repo para entidade, e manipular dentro do service
 @Module({
   imports: [TypeOrmModule.forFeature([Course])],
   controllers: [CoursesController],
