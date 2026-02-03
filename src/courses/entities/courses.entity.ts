@@ -1,37 +1,40 @@
-import { 
+import {
+  BeforeInsert,
   Column,
-  Entity, 
-  JoinTable, 
-  ManyToMany, 
-  PrimaryGeneratedColumn } from "typeorm";
-import { Tag } from "./tags.entity";
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { Tag } from './tags.entity'
+import { randomUUID } from 'node:crypto'
 
-@Entity('courses') 
+@Entity('courses')
 export class Course {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
   @Column()
-  name: string; 
+  name: string
 
   @Column()
-  description: string;
+  description: string
 
-  //relacionamento muitos para muitos, entidades
   @JoinTable()
   @ManyToMany(() => Tag, tag => tag.courses, {
-    cascade: true, //Qualquer dado que estiver na entidade relacionada, sera salvos/criados automaticamente
+    cascade: true,
   })
-  tags: Tag[];
+  tags: Tag[]
 
-  @CreateDateColumn({ type: 'timestamp'})
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date
 
   @BeforeInsert()
   generatedId() {
     if (this.id) {
       return
     }
-    this.id = randomUUID();
+    this.id = randomUUID()
   }
 }
