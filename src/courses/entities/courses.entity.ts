@@ -23,4 +23,15 @@ export class Course {
     cascade: true, //Qualquer dado que estiver na entidade relacionada, sera salvos/criados automaticamente
   })
   tags: Tag[];
+
+  @CreateDateColumn({ type: 'timestamp'})
+  created_at: Date;
+
+  @BeforeInsert()
+  generatedId() {
+    if (this.id) {
+      return
+    }
+    this.id = randomUUID();
+  }
 }
