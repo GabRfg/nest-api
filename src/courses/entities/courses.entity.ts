@@ -1,5 +1,4 @@
 import { 
-  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity, 
@@ -7,14 +6,15 @@ import {
   ManyToMany, 
   PrimaryGeneratedColumn } from "typeorm";
 import { Tag } from "./tags.entity";
+import { BeforeInsert } from "typeorm/browser";
 import { randomUUID } from "node:crypto";
 
 @Entity('courses') 
 export class Course {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('varchar')
+  @Column()
   name: string; 
 
   @Column()
@@ -35,6 +35,6 @@ export class Course {
     if (this.id) {
       return
     }
-    this.id = randomUUID();
+    this.id randomUUID
   }
 }

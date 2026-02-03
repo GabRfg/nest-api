@@ -15,6 +15,5 @@ export const dataSource = new DataSource({
     CreateCoursesTagsTable1770143960590,
     AddCoursesIdToCoursesTagsTable1770145880247,
     AddTagsCoursesTagsTable1770146988254
-
   ], //pega o que esta no arquivo, propriedades de conexão, e aplicar ao database
 });
