@@ -35,6 +35,6 @@ export class Course {
     if (this.id) {
       return
     }
-    this.id = randomUUID(); 
+    this.id = randomUUID();
   }
 }
