@@ -21,7 +21,7 @@ export class CoursesService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const course = await this.courseRepository.findOne({ 
       where: { id },
       relations: ['tags']
@@ -45,7 +45,7 @@ export class CoursesService {
     return this.courseRepository.save(course);
   }
 
-  async update(id: string, updateCourseDTO: UpdateCourseDTO) {
+  async update(id: number, updateCourseDTO: UpdateCourseDTO) {
     const tags = updateCourseDTO.tags && 
     (await Promise.all(
       updateCourseDTO.tags.map(name => this.preloadTagByName(name)),
@@ -62,7 +62,7 @@ export class CoursesService {
     return this.courseRepository.save(course);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const course = await this.courseRepository.findOne({  where: { id } })
     if (!course) {
       throw new NotFoundException(`Course ID ${id} not found`)

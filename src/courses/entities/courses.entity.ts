@@ -1,20 +1,17 @@
 import { 
-  BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity, 
   JoinTable, 
   ManyToMany, 
   PrimaryGeneratedColumn } from "typeorm";
 import { Tag } from "./tags.entity";
-import { randomUUID } from "node:crypto";
 
 @Entity('courses') 
 export class Course {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('varchar')
+  @Column()
   name: string; 
 
   @Column()
