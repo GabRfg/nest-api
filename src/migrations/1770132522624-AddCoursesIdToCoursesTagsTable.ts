@@ -6,14 +6,14 @@ import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "t
 export class AddCoursesIdToCoursesTagsTable1770132522624 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.addColumn('courses_tags', new TableColumn({
+      await queryRunner.addColumn('courses_tags_tags', new TableColumn({
         name: 'courses_id',
         type: 'uuid',
         isNullable: true,
       })
     )
 
-    await queryRunner.createForeignKey('courses_tags', new TableForeignKey({
+    await queryRunner.createForeignKey('courses_tags_tags', new TableForeignKey({
       name: 'FK_Courses_Tags_Courses',
       columnNames: ['courses_id'],
       referencedTableName: 'courses',
@@ -24,8 +24,8 @@ export class AddCoursesIdToCoursesTagsTable1770132522624 implements MigrationInt
 }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropForeignKey('courses_tags', 'FK_Courses_Tags_Courses');
+      await queryRunner.dropForeignKey('courses_tags_tags', 'FK_Courses_Tags_Courses');
 
-      await queryRunner.dropColumn('courses_tags', 'courses_id');
+      await queryRunner.dropColumn('courses_tags_tags', 'courses_id');
     }
   }
