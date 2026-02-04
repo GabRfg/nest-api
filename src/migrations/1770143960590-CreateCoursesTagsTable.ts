@@ -25,6 +25,6 @@ export class CreateCoursesTagsTable1770143960590 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('courses_tags')
+    await queryRunner.dropTable('courses_tags_tags')
   }
 }
