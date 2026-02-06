@@ -1,4 +1,8 @@
-import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { 
+  HttpException, 
+  HttpStatus, 
+  Injectable, 
+  NotFoundException } from '@nestjs/common';
 import { Course } from './entities/courses.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,12 +12,11 @@ import { UpdateCourseDTO } from './dto/update-course-dto';
 
 @Injectable()
 export class CoursesService {
-  constructor(
     @InjectRepository(Course)
-    private readonly courseRepository: Repository<Course>,
+    private readonly courseRepository: Repository<Course>
+    
     @InjectRepository(Tag)
-    private readonly tagRepository: Repository<Tag>,
-  ) {}
+    private readonly tagRepository: Repository<Tag>
 
   async findAll() {
     return this.courseRepository.find({
