@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { CoursesService } from './courses.service';
 import { CreateCourseDTO } from './dto/create-course-dto';
+import { UpdateCourseDTO } from './dto/update-course-dto';
 
 describe('CoursesService', () => {
   let service: CoursesService;
@@ -93,6 +94,25 @@ describe('CoursesService', () => {
     const course = await service.findOne(id)
 
     expect(mockCourseRepository.findOne).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
+  })
+
+    //Update 
+    it('should update a course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const updateCourseDTO: UpdateCourseDTO = {
+      name: 'tenest-jest',
+      description: 'teste update descriptions',
+      tags: ['jestJs'],
+    }
+
+    const course = await service.update(id,  UpdateCourseDTO)
+
+    expect(mockCourseRepository.save).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(course)
   })
 })
