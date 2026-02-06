@@ -52,7 +52,7 @@ describe('CoursesService', () => {
   });
 
   //the exception bellow is only for testing purpose (service)
-  it('should be create a course', async () => {
+  it('should create a course', async () => {
     //@ts-expect-error defined part of methods
     service['courseRepository'] = mockCourseRepository
      //@ts-expect-error defined part of methods
@@ -70,8 +70,8 @@ describe('CoursesService', () => {
     expect(expectOutputCourses).toStrictEqual(newCourse)
   })
 
-  //findall
-    it('should list all course', async () => {
+  //findAll
+    it('should gets all course', async () => {
     //@ts-expect-error defined part of methods
     service['courseRepository'] = mockCourseRepository
      //@ts-expect-error defined part of methods
@@ -81,5 +81,18 @@ describe('CoursesService', () => {
 
     expect(mockCourseRepository.find).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(courses)
+  })
+
+    //findOne
+    it('should get one course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const course = await service.findOne(id)
+
+    expect(mockCourseRepository.findOne).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
   })
 })
