@@ -57,7 +57,7 @@ describe('CoursesService', () => {
     service['courseRepository'] = mockCourseRepository
      //@ts-expect-error defined part of methods
     service['tagRepository'] = mockTagRepository
-
+    
     const createCourseDTO: CreateCourseDTO = {
       name: 'test',
       description: 'teste description',
@@ -68,5 +68,18 @@ describe('CoursesService', () => {
 
     expect(mockCourseRepository.save).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(newCourse)
-  });
-});
+  })
+
+  //findall
+    it('should list all course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const courses = await service.findAll()
+
+    expect(mockCourseRepository.find).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(courses)
+  })
+})
