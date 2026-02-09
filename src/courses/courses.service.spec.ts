@@ -113,6 +113,7 @@ describe('CoursesService', () => {
     const course = await service.update(id,  UpdateCourseDTO)
 
     expect(mockCourseRepository.save).toHaveBeenCalled();
+    expect(mockCourseRepository.preload).toHaveBeenCalled()
     expect(expectOutputCourses).toStrictEqual(course)
   })
 
@@ -131,6 +132,7 @@ describe('CoursesService', () => {
 
     const course = await service.remove(id)
 
+    expect(mockCourseRepository.findOne).toHaveBeenCalled()
     expect(mockCourseRepository.remove).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(course)
   })
