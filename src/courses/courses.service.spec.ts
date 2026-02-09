@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { CoursesService } from './courses.service';
 import { CreateCourseDTO } from './dto/create-course-dto';
+import { UpdateCourseDTO } from './dto/update-course-dto';
 
 describe('CoursesService', () => {
   let service: CoursesService;
@@ -52,7 +53,7 @@ describe('CoursesService', () => {
   });
 
   //the exception bellow is only for testing purpose (service)
-  it('should be create a course', async () => {
+  it('should create a course', async () => {
     //@ts-expect-error defined part of methods
     service['courseRepository'] = mockCourseRepository
      //@ts-expect-error defined part of methods
@@ -70,8 +71,8 @@ describe('CoursesService', () => {
     expect(expectOutputCourses).toStrictEqual(newCourse)
   })
 
-  //findall
-    it('should list all course', async () => {
+  //findAll
+    it('should gets all course', async () => {
     //@ts-expect-error defined part of methods
     service['courseRepository'] = mockCourseRepository
      //@ts-expect-error defined part of methods
@@ -81,5 +82,56 @@ describe('CoursesService', () => {
 
     expect(mockCourseRepository.find).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(courses)
+  })
+
+    //findOne
+    it('should get one course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const course = await service.findOne(id)
+
+    expect(mockCourseRepository.findOne).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
+  })
+
+    //Update 
+    it('should update a course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const updateCourseDTO: UpdateCourseDTO = {
+      name: 'tenest-jest',
+      description: 'teste update descriptions',
+      tags: ['jestJs'],
+    }
+
+    const course = await service.update(id,  UpdateCourseDTO)
+
+    expect(mockCourseRepository.save).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
+  })
+
+    //Remove 
+    it('should remove a course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const updateCourseDTO: UpdateCourseDTO = {
+      name: 'remove-jest',
+      description: 'teste remove descriptions',
+      tags: ['jest-remove'],
+    }
+
+    const course = await service.remove(id)
+
+    expect(mockCourseRepository.remove).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
   })
 })
