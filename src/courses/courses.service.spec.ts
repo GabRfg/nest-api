@@ -115,4 +115,23 @@ describe('CoursesService', () => {
     expect(mockCourseRepository.save).toHaveBeenCalled();
     expect(expectOutputCourses).toStrictEqual(course)
   })
+
+    //Remove 
+    it('should remove a course', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository
+     //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository
+
+    const updateCourseDTO: UpdateCourseDTO = {
+      name: 'remove-jest',
+      description: 'teste remove descriptions',
+      tags: ['jest-remove'],
+    }
+
+    const course = await service.remove(id)
+
+    expect(mockCourseRepository.remove).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(course)
+  })
 })
